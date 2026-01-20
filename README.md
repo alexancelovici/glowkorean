@@ -1,186 +1,129 @@
-# 🌸 GlowKorean
+# 🌸 GlowKorean – Full-Stack E-Commerce Platform
 
-GlowKorean es una tienda en línea de productos cosméticos coreanos. Está construida con **React + Vite + TailwindCSS** en el frontend y **Node.js + Express + MongoDB** en el backend. Incluye autenticación con JWT, gestión de productos y un sistema de carrito funcional.
+Full-stack e-commerce application for Korean skincare products.  
+Built with a **React + Vite frontend** and a **Node.js + Express backend**, featuring JWT authentication, product management, cart persistence, and a simulated checkout flow.
+
+🔗 Live demo (frontend): https://glowkorean.netlify.app/
 
 ---
 
-## 🚀 Tecnologías usadas
+## 🧠 Overview
 
-### 💻 Frontend
+GlowKorean models a real online store workflow:
+
+- Users can browse products, register, and log in securely
+- Authenticated users manage a persistent shopping cart
+- Admin users can create and manage products
+- The system exposes a REST API consumed by the frontend
+
+The project focuses on **full-stack architecture, authentication, and clean API design**.
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
 - React
 - Vite
 - TailwindCSS
 - React Router DOM
 - Axios
 
-### 🖥️ Backend
+### Backend
 - Node.js
 - Express.js
 - MongoDB + Mongoose
 - JSON Web Tokens (JWT)
-- Cookie-parser
-- Dotenv
+- HTTP-only cookies
+- cookie-parser
+- dotenv
 
 ---
 
-## 🎯 Funcionalidades principales
+## ✨ Features
 
-- 🛍️ Catálogo de productos con descripción, imagen, precio y detalle
-- 🔐 Registro e inicio de sesión con autenticación JWT
-- 🛒 Carrito persistente con opción de modificar cantidades
-- ✅ Checkout simulado
-- 👩‍💼 Panel admin para crear productos
-- 🧠 Manejo de errores (login, validaciones, rutas 404)
-- 📱 Diseño responsive con TailwindCSS
-
----
-
-## 🧠 Aprendizajes destacados
-
-- Arquitectura fullstack con separación de frontend y backend
-- Manejo de estado global con `useReducer` y Context
-- Integración frontend-backend mediante API REST
-- Autenticación segura con JWT y cookies HTTP-only
-- CRUD completo con Mongoose
-- Rutas protegidas con middleware y sesiones persistentes
+- Product catalog with image, price, and description
+- User registration and login
+- JWT authentication using HTTP-only cookies
+- Protected routes (profile, cart, admin actions)
+- Persistent shopping cart with quantity updates
+- Simulated checkout flow
+- Admin panel for product creation
+- Error handling for authentication, validation, and 404 routes
+- Responsive UI with TailwindCSS
 
 ---
 
-## 🛠 Instalación local
+## 🔐 Authentication & Security
 
-### 1. Clona el repositorio
+- JWT stored in **HTTP-only cookies**
+- Protected backend routes enforced via middleware
+- Session persistence across refreshes
+- Environment variables used for secrets and configuration
+- CORS configured to allow only trusted frontend origins
 
-```bash
-git clone https://github.com/tu-usuario/glowkorean.git
-cd glowkorean
-```
+---
 
-### 2. Configura las variables de entorno
+## 📦 Project Structure
 
-#### 📦 backend/.env
+frontend/
+├── components/ # Reusable UI components
+├── contexts/ # Global state (auth, cart, products)
+├── routes/ # Protected and public views
+├── utils/ # Helper functions
+├── Router.jsx # Routing configuration
+└── main.jsx # Entry point
+backend/
+├── controllers/ # Business logic
+├── middleware/ # Auth & security middleware
+├── models/ # Mongoose models
+├── routes/ # Express routes
+└── index.js # Server entry point
 
-```env
+
+---
+
+## ⚙️ Environment Variables
+
+### Backend (`backend/.env`)
 PORT=3000
-MONGODB_URI=mongodb+srv://glowkorean_user:glowkorean2025@cluster0.clgbwd8.mongodb.net/glowkorean?retryWrites=true&w=majority&appName=Cluster0
-SECRET=DWFS
+MONGODB_URI=<your_mongodb_connection>
+JWT_SECRET=<your_jwt_secret>
 NODE_ENV=development
-
-FRONTEND_URL_PROD=https://mi-app-frontend.up.railway.app
 FRONTEND_URL_DEV=http://localhost:5173
+FRONTEND_URL_PROD=<your_frontend_url>
 
-STRIPE_SUCCESS_URL=http://localhost:5173/pago-exitoso
-STRIPE_CANCEL_URL=http://localhost:5173/pago-cancelado
-```
 
-#### 💻 frontend/.env
-
-```env
+### Frontend (`frontend/.env`)
 VITE_BACKEND_URL=http://localhost:3000/api
-```
 
-### 3. Instala las dependencias
-
-```bash
-# Backend
-cd backend
-npm install
-
-# Frontend
-cd ../frontend
-npm install
-```
+Example files are provided via `.env.example`.
 
 ---
 
-## ▶️ Ejecución
+## ▶️ Run Locally
 
+### Backend
 ```bash
-# Backend
 cd backend
+npm install
 npm run dev
-
-# Frontend
-cd ../frontend
+Frontend
+cd frontend
+npm install
 npm run dev
-```
-
----
-
-## 🧪 Poblar productos de ejemplo
-
-```bash
+🧪 Seed Sample Products (Optional)
 cd backend
 node insert_products.js
-```
-
-Esto cargará productos ficticios en la base de datos.
-
----
-
-## 📁 Estructura del proyecto
-
-```bash
-frontend/
-├── components/     # Componentes reutilizables
-├── contexts/       # Estado global (auth, cart, productos)
-├── routes/         # Vistas protegidas
-├── utils/          # Funciones auxiliares
-├── Router.jsx      # Sistema de rutas
-└── main.jsx        # Punto de entrada
-
-backend/
-├── controllers/    # Lógica de negocio
-├── middleware/     # Middlewares JWT
-├── models/         # Modelos de mongoose
-├── routes/         # Rutas de Express
-└── index.js        # Servidor principal
-```
-
----
-
-## 🔐 Autenticación
-
-- JWT con cookies HTTP-only
-- Rutas privadas (perfil, carrito)
-- Persistencia de sesión
-- Seguridad reforzada en frontend/backend
-
----
-
-## ✅ Estado actual
-
-| Módulo           | Estado       |
-|------------------|--------------|
-| Catálogo         | ✅ Terminado |
-| Registro/Login   | ✅ Terminado |
-| Carrito          | ✅ Terminado |
-| Checkout         | ✅ Simulado  |
-| Crear productos  | ✅ Terminado |
-| API REST         | ✅ Completa  |
-| Seguridad JWT    | ✅ Implementada |
-
----
-
-## 🌐 Futuras mejoras
-
-- Integración real con Stripe
-- Historial de compras en panel admin
-- Filtro y búsqueda avanzada
-- Wishlist / Favoritos
-- Sistema de notificaciones
-- 🧠 Recomendaciones personalizadas usando Machine Learning: analizar búsquedas y compras para sugerir productos relevantes
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo licencia MIT.  
-Desarrollado como parte del aprendizaje en desarrollo web fullstack.
-
-
----
-
-### 🌍 Deploy
-
-Este proyecto está desplegado en Netlify:  
-🔗 [https://glowkorean.netlify.app/](https://glowkorean.netlify.app/)
+This will populate the database with example products.
+🗺️ Roadmap
+Real Stripe payment integration
+Order history and admin order management
+Product search and advanced filtering
+Wishlist / favorites
+Notification system
+📄 License
+MIT License
+👨‍💻 Author
+Alex Ancelovici
+Full-Stack Developer (Node.js, Express, React, REST APIs)
