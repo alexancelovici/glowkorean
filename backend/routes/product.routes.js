@@ -4,17 +4,16 @@ const {
   createProduct,
   updateProductById,
   deleteProductById,
-  getProductBySlug // 👈 agregalo si no está
+  getProductBySlug
 } = require("../controllers/product.controller");
+const { validateProduct, validateProductUpdate, handleValidation } = require("../middleware/validators");
 
 const productRouter = express.Router();
 
 productRouter.get("/", getAllProducts);
-productRouter.post("/", createProduct);
-productRouter.put("/:id", updateProductById);
+productRouter.post("/", validateProduct, handleValidation, createProduct);
+productRouter.put("/:id", validateProductUpdate, handleValidation, updateProductById);
 productRouter.delete("/:id", deleteProductById);
-
-// 👇 ESTA es la ruta que te falta
 productRouter.get("/:slug", getProductBySlug);
 
 module.exports = productRouter;
