@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/db");
+const { errorHandler } = require("./middleware/errorHandler");
 require("dotenv").config();
 
 const userRouter = require("./routes/user.routes");
@@ -23,6 +24,9 @@ app.use(cookieParser());
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
+
+// 🔴 Global Error Handler - MUST be after all routes
+app.use(errorHandler);
 
 app.listen(process.env.PORT || 3000, () =>
   console.log(`servidor levantado en ${process.env.PORT}`)
